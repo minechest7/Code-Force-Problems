@@ -6,7 +6,7 @@ int main()
 {
     int people;
     cin>>people;
-    
+
     int x;
     int y=0;
     for(int i=1;i<=people;i++)
@@ -14,7 +14,7 @@ int main()
         cin>>x;
         y=y+x;
     }
-    if(y==1)
+    if(y>0)
     {
         cout<< "HARD"<<endl;
     }
@@ -22,6 +22,6 @@ int main()
     {
         cout<< "EASY"<<endl;
     }
-    
+
     return 0;
 }
