@@ -9,6 +9,7 @@ int main()
 
     int x;
     int y=0;
+    
     for(int i=1;i<=people;i++)
     {
         cin>>x;
