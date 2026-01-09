@@ -1,61 +1,65 @@
 //https://codeforces.com/problemset/problem/469/A
-#include <iostream>
-#include <string>
-#include <set>
+#include<iostream>
+#include<vector>
 using namespace std;
+
+void insertElement(vector<int>*a,int b);
 
 int main()
 {
-    int n; // highest level(1 to n)
-    int p; // total number of level p can pass
-    int q; // total number of level q can pass
+    int n;//the number of levels they have to pass
+    int p;//the number of levels mr x can pass
+    int q;//the number of levels mr y can pass
+    vector<int>combined;//the combined levels that mr x and y can pass together
+    //bool clearGame=false;//the state if mr x and y can together clear the whole game
 
-    cin >> n >> p;
+    cin>>n;
 
-    int pLevels[p]; // the levels p can pass
-    for (int i = 0; i < p; i++) // initializing pLevels array
+    cin>>p;
+    int arr1[p];
+
+    for(int i=0;i<p;i++)//the levels that mr x can pass
     {
-        cin >> pLevels[i];
+        cin>>arr1[i];
+        insertElement(&combined,arr1[i]);
     }
 
-    cin >> q;
-
-    int qLevels[q]; // the levels q can pass
-    for (int i = 0; i < q; i++) // initializing qLevels array
+    cin>>q;
+    int arr2[q];
+    for(int i=0;i<q;i++)//the levels that mr y can pass
     {
-        cin >> qLevels[i];
+        cin>>arr2[i];
+        insertElement(&combined,arr2[i]);
+
     }
 
-    set<int> totaLevels; // the total number of levels p and q can pass
-
-    for (int i = 0; i < p; i++) // inserting pLevels elements to the set
+    bool present;
+    for(int i=1;i<=n;i++)//searches the entire vector and check if 1 to n number is present in it
     {
-        int x = pLevels[i];
-        totaLevels.insert(x);
-    }
-
-    for (int i = 0; i < q; i++) // inserting qLevels elements to the set
-    {
-        int x = qLevels[i];
-        totaLevels.insert(x);
-    }
-
-    // checking if all the levels required to pass exists in the set
-    bool pass = true;
-
-    for (int i = 1; i <= n; i++)
-    {
-        if (totaLevels.count(i) == 0)
+         present=false;
+        for(int j=0;j<combined.size();j++)
         {
-            pass = false;
+            if(combined.at(j)==i)
+            {
+                present=true;
+                break;
+            }
+        }
+        if(present==false)
+        {
+            cout<< "Oh, my keyboard!"<<endl;
             break;
         }
     }
-
-    if (pass)
-        cout << "I become the guy." << endl;
-    else
-        cout << "Oh, my keyboard!" << endl;
+    if(present==true)
+    {
+        cout<< "I become the guy."<<endl;
+    }
 
     return 0;
+}
+
+void insertElement(vector<int>*a,int b)
+{
+    (*a).push_back(b);
 }
